@@ -20,3 +20,167 @@
 .App-link {
   color: #09d3ac;
 }
+
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css);
+/* Vars */
+.weather__item:nth-of-type(1) {
+  background: #e3bb88;
+}
+
+.weather__item:nth-of-type(2) {
+  background: #d89864;
+}
+
+.weather__item:nth-of-type(3) {
+  background: #c1887d;
+}
+
+.weather__item:nth-of-type(4) {
+  background: #b1695a;
+}
+
+.weather__item:nth-of-type(5) {
+  background: #644749;
+}
+
+/* Main Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Lato";
+  background: #212121;
+  color: #f5f5f5;
+  line-height: 1.6;
+  font-size: 1.4rem;
+}
+
+/* Weather App*/
+.weather {
+  background: #8ba892;
+  color: #fff;
+  overflow: hidden;
+  margin: 20px auto;
+  max-width: 320px;
+}
+.weather__header {
+  color: #d1dcd3;
+  display: flex;
+  font-size: 1rem;
+  justify-content: space-between;
+  padding: 20px;
+}
+.weather__header i {
+  margin-right: 5px;
+}
+.weather__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.weather__item {
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  padding: 20px 10px;
+  transition: border 0.3s 0s, padding 0.3s 0.5s;
+  width: 100%;
+}
+.weather__item:hover {
+  border-color: #ce7d3b;
+}
+.weather__item .weather__icon,
+.weather__item .weather__info {
+  opacity: 0;
+  transition: all 0.3s 0.3s cubic-bezier(1, -0.5, 0, 1);
+}
+.weather__item .weather__info {
+  transform: translateY(50px);
+  transition: opacity 0.3s 0s cubic-bezier(1, -0.5, 0, 1), transform 0.3s 0s cubic-bezier(1, -0.5, 0, 1);
+}
+.weather__item.active {
+  border-color: #ce7d3b;
+  padding: 50px 10px 150px;
+  transition-delay: 0s;
+}
+.weather__item.active .weather__icon,
+.weather__item.active .weather__info {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.3s;
+}
+.weather__icon {
+  width: 40%;
+}
+.weather__details {
+  width: 60%;
+}
+.weather__icon {
+  font-size: 3rem;
+  position: relative;
+  transform: translateX(-50px);
+}
+.weather__icon i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.weather__details {
+  padding-left: 30px;
+  position: relative;
+}
+.weather__info {
+  left: 30px;
+  position: absolute;
+  width: calc(100% - 30px);
+}
+.weather__text {
+  font-size: 1rem;
+}
+
+.icon-01d:before {
+  content: "\f00d";
+}
+
+.icon-02d:before {
+  content: "\f002";
+}
+
+.icon-03d:before {
+  content: "\f041";
+}
+
+.icon-04d:before {
+  content: "\f013";
+}
+
+.icon-09d:before {
+  content: "\f01a";
+}
+
+.icon-10d:before {
+  content: "\f009";
+}
+
+.icon-11d:before {
+  content: "\f01e";
+}
+
+.icon-13d:before {
+  content: "\f01b";
+}
+
+.icon-50d:before {
+  content: "\f014";
+}
+
+/* converts icon font codes from simpleweather.js to Weather Icons from Erik Flowers */
