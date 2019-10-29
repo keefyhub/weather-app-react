@@ -23,6 +23,7 @@ class App extends React.Component {
             result: []
         };
     }
+
     componentDidMount() {
         fetch(url)
             .then(res => res.json())
@@ -45,7 +46,7 @@ class App extends React.Component {
     handleClick(e) {
         e.preventDefault();
         let test = document.querySelectorAll(".weather__item.active");
-        [].forEach.call(test, function(el) {
+        [].forEach.call(test, function (el) {
             el.classList.remove("active");
         });
 
@@ -87,15 +88,13 @@ class App extends React.Component {
         let date = new Date(item.dt_txt);
         let day = date.getDay();
         let windDirection = this.getWindDirection(item.wind.deg);
-        let windSpeed = Math.round((item.wind.speed * 2.2369362920544) * 100/ 100);
+        let windSpeed = Math.round((item.wind.speed * 2.2369362920544) * 100 / 100);
 
         return (
-            <li
-                className={"weather__item " + (index === 0 ? "active" : false)}
-                onClick={this.handleClick}
-            >
+            <li className={"weather__item " + (index === 0 ? "active" : false)}
+                onClick={this.handleClick}>
                 <div className="weather__icon">
-                    <i className={`wi icon-${item.weather[0].icon}`} />
+                    <i className={`wi icon-${item.weather[0].icon}`}/>
                 </div>
                 <div className="weather__details">
                     <div className="weather__day">{this.state.days[day]}</div>
@@ -115,10 +114,7 @@ class App extends React.Component {
     }
 
     render() {
-        const { error, isLoaded, result } = this.state;
-        const items = result.list;
-        // console.log(items);
-
+        const {error, isLoaded, result} = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -146,7 +142,7 @@ class App extends React.Component {
                 <div class="weather" id="js-weather">
                     <header class="weather__header">
                         <div class="weather__city">
-                            <i class="fa fa-map-marker" />
+                            <i class="fa fa-map-marker"/>
                             {result.city.name}
                         </div>
                         <div class="weather__country">{result.city.country}</div>

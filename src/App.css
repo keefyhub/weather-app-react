@@ -1,28 +1,6 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
-}
-
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css);
+
 /* Vars */
 .weather__item:nth-of-type(1) {
   background: #e3bb88;
@@ -151,19 +129,30 @@ body {
   content: "\f00d";
 }
 
+.icon-01n:before {
+  content: "\f02e";
+}
+
 .icon-02d:before {
   content: "\f002";
 }
 
-.icon-03d:before {
+.icon-02n:before {
+  content: "\f086";
+}
+
+.icon-03d:before,
+.icon-03n:before {
   content: "\f041";
 }
 
-.icon-04d:before {
+.icon-04d:before,
+.icon-04n:before {
   content: "\f013";
 }
 
-.icon-09d:before {
+.icon-09d:before,
+.icon-09n:before {
   content: "\f01a";
 }
 
@@ -171,16 +160,22 @@ body {
   content: "\f009";
 }
 
-.icon-11d:before {
+.icon-10n:before {
+  content: "\f037";
+}
+
+.icon-11d:before,
+.icon-11n:before {
   content: "\f01e";
 }
 
-.icon-13d:before {
+.icon-13d:before,
+.icon-13n:before {
   content: "\f01b";
 }
 
-.icon-50d:before {
+.icon-50d:before,
+.icon-50n:before {
   content: "\f014";
 }
 
-/* converts icon font codes from simpleweather.js to Weather Icons from Erik Flowers */
