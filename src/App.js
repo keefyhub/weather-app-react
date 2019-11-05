@@ -85,7 +85,7 @@ class App extends React.Component {
         console.log(item);
         let temp = item.main.temp - 273.15;
         temp = Math.round(temp * 100 / 100);
-        let date = new Date(item.dt_txt);
+        let date = new Date(item.dt_txt.substring(0, 10));
         let day = date.getDay();
         let windDirection = this.getWindDirection(item.wind.deg);
         let windSpeed = Math.round((item.wind.speed * 2.2369362920544) * 100 / 100);
