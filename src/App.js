@@ -25,23 +25,48 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        fetch(url)
-            .then(res => res.json())
-            .then(
-                result => {
-                    this.setState({
-                        isLoaded: true,
-                        result: result
-                    });
-                },
-                error => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            );
+        const key = 'weather';
+        const cachedHits = localStorage.getItem(key);
+        const cachedTimeStamp = localStorage.getItem(`${key}_timestamp`);
+        const now = new Date().getTime() / 1000;
+        // console.log(this.hoursBetween(Math.floor(now), parseInt(cachedTimeStamp)));
+        if (cachedHits !== 'undefined' && (this.hoursBetween(Math.floor(now), parseInt(cachedTimeStamp)) <= 1)) {
+            this.setState({
+                isLoaded: true,
+                result: JSON.parse(cachedHits)
+            });
+        } else {
+            fetch(url)
+                .then(res => res.json())
+                .then(
+                    result => {
+                        this.setState({
+                            isLoaded: true,
+                            result: result
+                        });
+
+                        return result;
+                    },
+                    error => {
+                        this.setState({
+                            isLoaded: true,
+                            error
+                        });
+                    }
+                )
+                .then(result => this.onSetResult(result, key));
+        }
     }
+
+    onSetResult = (result, key) => {
+        const today = new Date().getTime() / 1000;
+        localStorage.setItem(key, JSON.stringify(result));
+        localStorage.setItem(`${key}_timestamp`, Math.floor(today));
+    };
+
+    hoursBetween = (d1, d2) => {
+        return Math.abs(d1 - d2) / (60 * 60);
+    };
 
     handleClick(e) {
         e.preventDefault();
@@ -82,7 +107,7 @@ class App extends React.Component {
     }
 
     renderItem(item, index) {
-        console.log(item);
+        // console.log(item);
         let temp = item.main.temp - 273.15;
         temp = Math.round(temp * 100 / 100);
         let date = new Date(item.dt_txt.substring(0, 10));
@@ -92,7 +117,8 @@ class App extends React.Component {
 
         return (
             <li className={"weather__item " + (index === 0 ? "active" : false)}
-                onClick={this.handleClick}>
+                onClick={this.handleClick}
+                key={index}>
                 <div className="weather__icon">
                     <i className={`wi icon-${item.weather[0].icon}`}/>
                 </div>
@@ -139,15 +165,15 @@ class App extends React.Component {
             });
 
             return (
-                <div class="weather" id="js-weather">
-                    <header class="weather__header">
-                        <div class="weather__city">
-                            <i class="fa fa-map-marker"/>
+                <div className="weather">
+                    <header className="weather__header">
+                        <div className="weather__city">
+                            <i className="fa fa-map-marker"/>
                             {result.city.name}
                         </div>
-                        <div class="weather__country">{result.city.country}</div>
+                        <div className="weather__country">{result.city.country}</div>
                     </header>
-                    <ul class="weather__list">{listItems}</ul>
+                    <ul className="weather__list">{listItems}</ul>
                 </div>
             );
         }
